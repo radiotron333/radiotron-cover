@@ -55,18 +55,3 @@ app.get('/save-cover', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server attivo sulla porta ${PORT}`);
 });
-
-    if (!response.ok) throw new Error('Errore nel download');
-
-    const buffer = await response.arrayBuffer();
-    fs.writeFileSync(filepath, Buffer.from(buffer));
-    res.send(`✅ Copertina salvata come ${filename}`);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('❌ Errore nel salvataggio');
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server attivo sulla porta ${PORT}`);
-});
