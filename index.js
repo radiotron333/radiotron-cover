@@ -1,7 +1,8 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
+import https from 'https';
+import fetch from 'node-fetch';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,7 +35,9 @@ app.get('/save-cover', async (req, res) => {
 
   try {
     console.log(`➡️ Download da: ${url}`);
-    const response = await fetch(url);
+    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
+    const response = await fetch(url, { agent: httpsAgent });
 
     if (!response.ok) {
       console.error(`❌ Errore fetch: ${response.status} ${response.statusText}`);
